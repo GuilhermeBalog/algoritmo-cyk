@@ -2,6 +2,18 @@
 
 Implementação do algoritmo CYK para gramáticas livres de contexto. Exercício programa de Introdução à Teoria da Computação
 
+## Como Rodar
+
+Clone o repositório, compile o código e execute com o java:
+
+```bash
+git clone https://github.com/GuilhermeBalog/algoritmo-cyk.git
+cd algoritmo-cyk
+
+javac *.java
+java glc
+```
+
 ## Autores
 
 <table>
