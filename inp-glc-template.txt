@@ -1,0 +1,9 @@
+n -> gramáticas a serem testadas.
+### definição das gramáticas (n vezes)
+q1 t1 s1 -> número de variáveis, número de símbolos terminais, número de regras de substituição da gramática G1 (todos positivos).
+A B C -> variáveis separadas por espaço. A primeira é a inicial.
+a b c -> terminais separados por espaço.
+### regras de substituição (s1 vezes)
+A -> &
+A -> a
+A -> A B

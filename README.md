@@ -14,6 +14,10 @@ javac *.java
 java glc
 ```
 
+## Objetivo
+
+Desenvolver um programa para processamento de Gramáticas Livres do Contexto (GLCs). Dada a especificação de uma GLC *G* na Forma Normal de Chomsky e uma cadeia *w* ∈ Σ∗, seu programa deve determinar se *G* gera *w*, e devolver a matriz *Tabela* (vide descrição do algoritmo) e o status (aceita / rejeita). Em outras palavras, o problema é decidir se *w*  pertence a *L(G)*.
+
 ## Autores
 
 <table>

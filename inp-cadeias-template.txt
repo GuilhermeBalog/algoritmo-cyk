@@ -1,0 +1,12 @@
+n -> número de cadeias de teste pra uma gramática
+.
+.
+.
+.
+n linhas
+m -> outra sequência de cadeias
+.
+.
+.
+.
+m linhas
