@@ -1,3 +1,8 @@
+/**
+ * @author Gabriel de Castro Michelassi - 11208162
+ * @author Guilherme Balog Gardino - 11270649
+*/
+
 import java.util.List;
 
 public class ContextFreeGrammar {
