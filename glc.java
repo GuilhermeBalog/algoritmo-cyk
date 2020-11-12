@@ -48,11 +48,10 @@ public class glc {
             boolean[] testsResults = new boolean[testCases.length];
 
             for (int j = 0; j < testCases.length; j++) {
-                testsResults[i] = grammar.validate(testCases[i]);
+                testsResults[i] = grammar.validate(testCases[j]);
             }
             
             outputFile.println(buildReportLine(testsResults));
-            System.out.println(grammar);
         }
     }
 
@@ -70,8 +69,8 @@ public class glc {
 
         for (int i = 0; i < n_rules; i++) {
             rules[i] = new LinkedList<String>();
-            String[] rule = file.nextLine().split(" ");
 
+            String[] rule = file.nextLine().split(" ");
             
             for(String productionMember : rule){
                 if(productionMember.equals("=>"))

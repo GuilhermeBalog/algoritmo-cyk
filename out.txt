@@ -1,0 +1,87 @@
+javac *.java
+java glc
+teste 0: & 
+teste 1: a 
+teste 2: a b a a b b 
+
+Começo da análise da cadeia: & (tamanho 1)
+Initial Table
+[]
+Table after first examine
+[S0]
+Table after last examine
+[S0]
+
+Fim da análise
+
+
+Começo da análise da cadeia: a (tamanho 1)
+Initial Table
+[]
+Table after first examine
+[A]
+Table after last examine
+[A]
+
+Fim da análise
+
+
+Começo da análise da cadeia: a b a a b b (tamanho 6)
+Initial Table
+[][][][][][]
+[][][][][][]
+[][][][][][]
+[][][][][][]
+[][][][][][]
+[][][][][][]
+Table after first examine
+[A][][][][][]
+[][B][][][][]
+[][][A][][][]
+[][][][A][][]
+[][][][][B][]
+[][][][][][B]
+Table after last examine
+[A][][][][][]
+[][B][][][][]
+[][][A][][][]
+[][][][A][][]
+[][][][][B][]
+[][][][][][B]
+
+Fim da análise
+
+teste 0: &
+teste 1: 0 1 
+teste 2: 0 0 1
+
+Começo da análise da cadeia: 0 1 (tamanho 2)
+Initial Table
+[][]
+[][]
+Table after first examine
+[A][]
+[][B]
+Table after last examine
+[A][]
+[][B]
+
+Fim da análise
+
+
+Começo da análise da cadeia: 0 0 1(tamanho 3)
+Initial Table
+[][][]
+[][][]
+[][][]
+Table after first examine
+[A][][]
+[][A][]
+[][][B]
+Table after last examine
+[A][][]
+[][A][]
+[][][B]
+
+Fim da análise
+
