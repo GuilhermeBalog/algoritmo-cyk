@@ -1,14 +1,14 @@
-import java.util.Map;
+import java.util.List;
 
 public class ContextFreeGrammar {
     public static final String emptyString = "&";
 
     private String[] variables;
     private String[] terminalSymbols;
-    private Map<String, String[]> productionRules;
+    private List<String>[] productionRules;
     private String initialVariable;
 
-    ContextFreeGrammar(String[] variables, String[] terminalSymbols, Map<String, String[]> productionRules) {
+    ContextFreeGrammar(String[] variables, String[] terminalSymbols, List<String>[] productionRules) {
         this.variables = variables;
         this.terminalSymbols = terminalSymbols;
         this.productionRules = productionRules;
@@ -31,12 +31,26 @@ public class ContextFreeGrammar {
     }
 
     private boolean doesEmptyProductionExists() {
-        String[] productions = this.productionRules.get(initialVariable);
+        /*String[] productions = this.productionRules.get(initialVariable);
 
         for (String production : productions) 
             if(production.equals(emptyString))
-                return true;
+                return true;*/
 
         return false;
+    }
+
+    public String toString(){
+        String output = "Variables: ";
+        for (String variable : variables) {
+            output += variable + " ";
+        }
+        output += "\nTerminal Symbols: ";
+        for (String terminalSymbol : terminalSymbols) {
+            output += terminalSymbol + " ";
+        }
+        output += "\nProduction Rules: " + productionRules;
+
+        return output;
     }
 }
