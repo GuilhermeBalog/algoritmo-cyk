@@ -21,32 +21,21 @@ public class ContextFreeGrammar {
     }
 
     public boolean validate(String input){
-        input = input.trim();
-        if(input.equals(emptyString))
-            return doesEmptyProductionExists();
-
-            
-        String[] w = input.split(" ");
+        String[] w = parseInputString(input);
         String[][] table = buildComputeTable(w);
-        
-        System.out.println("\nCOMEÇO DA ANÁLISE DA CADEIA: " + input + "(tamanho "+w.length+")");
 
-        System.out.println("Initial Table");
-        printTable(table);
+        if(w[0].equals(emptyString))
+            return doesEmptyProductionExists();
         
         examineEachSubStringOfLengthOne(w, table);    
-
-        System.out.println("Table after first examine");
-        printTable(table);
-
         examineOtherSubStrings(w, table);
 
-        System.out.println("Table after last examine");
-        printTable(table);
+        return (hasSymbol(table[0][w.length-1], initialVariable));
+    }
 
-        System.out.println("FIM DA ANÁLISE\n");
-
-        return (hasSymbol(table[0][w.length - 1], initialVariable));
+    private String[] parseInputString(String input){
+        input = input.trim();
+        return input.split(" ");
     }
 
     private String[][] buildComputeTable(String[] w) {
@@ -60,8 +49,6 @@ public class ContextFreeGrammar {
     }
 
     private void printTable(String[][] table) {
-        // String[][] table = new String[w.length][w.length];
-
         for(int i = 0; i < table.length; i++){
             for (int j = 0; j < table[i].length; j++)
                 System.out.print("["+table[i][j]+"]");
@@ -69,47 +56,57 @@ public class ContextFreeGrammar {
         }
     }
 
+    private String vectorToString(String[] vector){
+        String result = "";
+        for(int i = 0; i < vector.length; i++){
+            result += "["+vector[i]+"]";
+        }
+        return result;
+    }
+
     private boolean doesEmptyProductionExists() {
         for (List<String> rule : productionRules)
             if(rule.get(0).equals(initialVariable))
-                for (String symbol : rule) 
-                    if(symbol.equals(emptyString))
-                        return true;
+                if(rule.get(1).equals(emptyString))
+                    return true;
         return false;
     }
 
     private void examineEachSubStringOfLengthOne(String[] w, String[][] table) {
-        for (int i = 0; i < w.length; i++) 
+        for (int i = 0; i < w.length; i++)
             for(String A : variables)
                 for (List<String> rule : productionRules)
                     if(rule.get(0).equals(A))
-                        for(int j = 1; j < rule.size(); j++)
-                            if(rule.get(j).equals(w[i]))
+                        if(rule.size() == 2)
+                            if(rule.get(1).equals(w[i]))
                                 table[i][i] = A;
     }
 
     private void examineOtherSubStrings(String[] w, String[][] table) {
-        for(int l = 1; l < w.length; l++){
-            for(int i = 0; i < w.length - l + 1; i++){
+        for(int l = 2; l <= w.length; l++){ // tamanho da substring a ser analisada
+            for(int i = 0; i < w.length - l + 1; i++){ // [a][b][a][a][b][b]
                 int j = i + l - 1;
 
-                for(int k = i; k < j - 1; k++)
-                    for (List<String> rule : productionRules)
+                for(int k = i; k <= j - 1; k++){ // a b a = AB a ||  a aBA
+                    for (List<String> rule : productionRules){
                         if(rule.size() == 3){
                             // A -> BC
                             String A = rule.get(0);
                             String B = rule.get(1);
                             String C = rule.get(2);
-                            
-                            if(hasSymbol(table[i][k], B) && hasSymbol(table[k + 1][j], C))
+
+                            if(hasSymbol(table[i][k], B) && hasSymbol(table[k + 1][j], C)){
                                 table[i][j] = (table[i][j] + " " + A).trim();
+                            }
                         }
+                    }
+                }
             }
         }
     }
 
     private boolean hasSymbol(String tableCell, String search) {
-        String[] symbols = tableCell.trim().split(" ");
+        String[] symbols = tableCell.trim().split(" "); // "A B"
         
         for(String symbol : symbols)
             if(symbol.equals(search))

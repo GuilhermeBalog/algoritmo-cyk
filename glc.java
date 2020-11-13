@@ -14,8 +14,14 @@ import java.util.Scanner;
 public class glc {
     public static void main(String[] args) {
         // abrir arquivo
-        String specificationFilePath = "inpt-glc.txt";
+        String specificationFilePath = "inp-glc.txt";
         String testCasesFilePath = "inp-cadeias.txt";
+
+        if(args.length == 2){
+            specificationFilePath = args[0];
+            testCasesFilePath = args[1];
+        }
+        
         String outputFileFilePath = "out-status.txt";
 
         Scanner specificationFile = null;
@@ -28,8 +34,10 @@ public class glc {
             outputFile = new PrintWriter(outputFileFilePath);
             
             validateInputsWithCfg(specificationFile, testCasesFile, outputFile);
+
         } catch(FileNotFoundException ex){
             System.out.println("File not found");
+
         }finally{
             if(specificationFile != null){
                 specificationFile.close();
@@ -49,11 +57,12 @@ public class glc {
 
         for (int i = 0; i < numberOfGrammars; i++) {
             ContextFreeGrammar grammar = buildCfgFromFile(specificationFile);
+            
             String[] testCases = getTestCases(testCasesFile);
             boolean[] testsResults = new boolean[testCases.length];
 
             for (int j = 0; j < testCases.length; j++) {
-                testsResults[i] = grammar.validate(testCases[j]);
+                testsResults[j] = grammar.validate(testCases[j]);
             }
             
             outputFile.println(buildReportLine(testsResults));
